@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>QR Code Reader</title>
 
+  <meta name="theme-color" content="#16a34a" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="icons/icon-192.png" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+
   <style>
     * {
       margin: 0;
@@ -143,6 +148,17 @@
       color: white;
     }
 
+
+
+    .install-btn {
+      width: 100%;
+      margin-top: 12px;
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      color: #020617;
+      border: none;
+      display: none;
+    }
+
     .status {
       margin-top: 15px;
       color: #94a3b8;
@@ -179,6 +195,7 @@
       <p id="result">No QR code scanned yet.</p>
       <button class="copy-btn" onclick="copyResult()">Copy Result</button>
       <a id="openLink" class="open-btn" href="#" target="_blank">Open Link</a>
+      <button id="installBtn" class="install-btn">Install App</button>
     </div>
 
     <p class="status" id="status">Camera is not started.</p>
@@ -277,6 +294,38 @@
         statusText.textContent = "Copy failed. You can manually select the result.";
       });
     }
+
+
+    // PWA install support
+    let deferredPrompt;
+    const installBtn = document.getElementById("installBtn");
+
+    window.addEventListener("beforeinstallprompt", function(event) {
+      event.preventDefault();
+      deferredPrompt = event;
+      installBtn.style.display = "block";
+    });
+
+    installBtn.addEventListener("click", async function() {
+      if (!deferredPrompt) {
+        statusText.textContent = "Install option is not ready yet. Open from HTTPS/GitHub Pages and try again.";
+        return;
+      }
+
+      deferredPrompt.prompt();
+      await deferredPrompt.userChoice;
+      deferredPrompt = null;
+      installBtn.style.display = "none";
+    });
+
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", function() {
+        navigator.serviceWorker.register("service-worker.js").catch(function() {
+          // App still works if service worker registration fails.
+        });
+      });
+    }
+
   </script>
 
 </body>
