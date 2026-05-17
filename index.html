@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>QR Code Reader</title>
 
-  <meta name="theme-color" content="#16a34a" />
+  <meta name="theme-color" content="#0284c7" />
   <link rel="manifest" href="manifest.json" />
   <link rel="icon" href="icons/icon-192.png" />
   <link rel="apple-touch-icon" href="icons/icon-192.png" />
@@ -40,18 +40,23 @@
     }
 
     .logo {
-      width: 70px;
-      height: 70px;
+      width: 92px;
+      height: 92px;
       margin: 0 auto 15px;
-      border-radius: 20px;
-      background: linear-gradient(135deg, #22c55e, #16a34a);
+      border-radius: 28px;
+      background: #020617;
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 35px;
-      color: #020617;
-      font-weight: bold;
-      box-shadow: 0 10px 25px rgba(34, 197, 94, 0.35);
+      box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.45), 0 14px 35px rgba(34, 197, 94, 0.28);
+      overflow: hidden;
+    }
+
+    .logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
     h1 {
@@ -179,7 +184,7 @@
 <body>
 
   <div class="app">
-    <div class="logo">QR</div>
+    <div class="logo"><img src="icons/logo.png" alt="QR scanner logo"></div>
     <h1>QR Code Reader</h1>
     <p class="subtitle">Scan QR codes using your camera</p>
 

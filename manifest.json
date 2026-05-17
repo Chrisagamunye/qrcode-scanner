@@ -1,12 +1,12 @@
 {
   "name": "QR Code Reader",
   "short_name": "QR Reader",
-  "description": "A simple QR code scanner that uses the device camera.",
+  "description": "A polished QR code scanner that uses the device camera.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "background_color": "#020617",
-  "theme_color": "#16a34a",
+  "theme_color": "#0284c7",
   "orientation": "portrait-primary",
   "icons": [
     {
